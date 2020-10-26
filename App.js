@@ -1,16 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, Switch } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+import { calculateHours } from './src/utils/calculateHours'
+
 export default function App() {
-  // const [history, setHistory] = useState([{ in: null, out: null }]);
-  // const currentDate = new Date();
-  // const initialState = {
-  //   time: `${currentDate.getHours()} and ${currentDate.getMinutes()}`
-  // }
   const [time, setTime] = useState(new Date());
   const [history, setHistory] = useState([]);
+  const [isTimeInEnabled, setTimeInEnabled] = useState(true);
+  const [hours, setHours] = useState(0);
 
   const onChange = (e, selectedTime) => {
     const currentTime = selectedTime || time;
@@ -18,35 +17,35 @@ export default function App() {
   }
 
   const onPress = (e) => {
-    // Check most recent history to make a decision
-    // 2 things can happen
+    const newHistory = [...history];
 
-    // 1: in is null. submit time to be in
+    if (isTimeInEnabled) {
+      newHistory.push({ in: time, out: null });
+    } else {
+      newHistory[newHistory.length - 1].out = time;
+    }
 
-    // 2: in is not null. submit time to be out.
-
-    // 3. in is not null, out is not null. create a new object and set in to be time.
-
-    // const mostRecentHistory = { ...history[history.length - 1] };
-    //
-    // if (mostRecentHistory.in && mostRecentHistory.out) {
-    //   const newHistory = [...history, { in: time, out: null }];
-    //   setHistory(newHistory)
-    // } else if (mostRecentHistory.in && !mostRecentHistory.out) {
-    //   const newHistory = [...history];
-    //
-    // } else {
-    //
-    // }
-
-    const newHistory = [...history, time];
-    setHistory(newHistory);
+    setHistory(newHistory)
   }
+
+  const checkHours = (e) => {
+    const hourAmount = calculateHours(history);
+    setHours(hourAmount);
+  }
+
+  const toggleTimeInEnabled = () => setTimeInEnabled(previousState => !previousState);
+
+  console.log('history', history);
 
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+      <Switch
+        value={isTimeInEnabled}
+        onValueChange={toggleTimeInEnabled}
+      />
+      <Text>{isTimeInEnabled ? "Submit your Time IN" : "Submit your Time OUT"}</Text>
       <View>
         <Text>Pick your time here!</Text>
         <DateTimePicker
@@ -60,12 +59,12 @@ export default function App() {
         title="Submit time"
         onPress={onPress}
       />
-      <View>
-        <FlatList
-          data={history}
-          renderItem={(item) => <Text>{item}</Text>}
-        />
-      </View>
+      {history.map(item => (<Text>{`In: ${item.in} - Out: ${item.out}`}</Text>))}
+      <Button
+        title="Check your hours"
+        onPress={checkHours}
+      />
+      <Text>{hours}</Text>
     </View>
   );
 }

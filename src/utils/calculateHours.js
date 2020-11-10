@@ -19,3 +19,14 @@ export const calculateHours = (history) => {
 
   return hours
 }
+
+export const msToTime = (time) => {
+  let seconds = Math.floor(time / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+
+  let hourFormat = hours < 10 ? `0${hours}` : hours
+  let minuteFormat = minutes < 10 ? `0${minutes}` : minutes
+
+  return `${hourFormat}:${minuteFormat}`;
+}

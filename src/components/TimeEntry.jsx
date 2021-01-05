@@ -9,7 +9,7 @@ const TimeEntry = ({ navigation, time }) => {
 
   const onPress = () => {
     editTimeEntry(time)
-    navigation.navigate('Edit');
+    navigation.navigate('Edit', { id: time.id });
   }
 
   return (

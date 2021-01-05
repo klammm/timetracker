@@ -3,10 +3,11 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { Context } from '../context/TimeContext';
 
-const EditScreen = () => {
+const EditScreen = ({ route, navigation }) => {
   const { state, submitTimeEntry } = useContext(Context);
 
   console.log('state', state);
+  console.log('getparams', route.params);
 
   return (
     <View>

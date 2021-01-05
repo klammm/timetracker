@@ -7,6 +7,7 @@ import { Provider } from './src/context/TimeContext';
 
 import HomeScreen from './src/screens/HomeScreen';
 import EditScreen from './src/screens/EditScreen';
+import CreateScreen from './src/screens/CreateScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Edit" component={EditScreen} />
+          <Stack.Screen name="Create" component={CreateScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

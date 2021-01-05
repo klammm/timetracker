@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
 
   const onPress = () => {
     addNewTimeEntry();
-    navigation.navigate('Edit');
+    navigation.navigate('Create');
   }
 
   return (

@@ -24,10 +24,12 @@ const DATA = [
 ]
 
 const HomeScreen = ({ navigation }) => {
-  const { state, addTimeEntry } = useContext(Context);
+  const { state, addNewTimeEntry } = useContext(Context);
 
-  console.log(addTimeEntry);
-  console.log(state);
+  const onPress = () => {
+    addNewTimeEntry();
+    navigation.navigate('Edit');
+  }
 
   return (
     <View>
@@ -36,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
         renderItem={({ item }) => <TimeEntry time={{...item}} navigation={navigation} />}
         keyExtractor={(item) => item.id}
       />
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Edit')}>
+      <TouchableOpacity style={styles.addButton} onPress={onPress}>
         <Feather name="plus-square" size={24} color="black" />
       </TouchableOpacity>
       <Text style={styles.sumHours}>Total Hours Accumulated: {}</Text>

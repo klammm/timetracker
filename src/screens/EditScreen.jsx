@@ -6,13 +6,14 @@ import { Context } from '../context/TimeContext';
 const EditScreen = ({ route, navigation }) => {
   const { state, submitTimeEntry } = useContext(Context);
 
-  console.log('state', state);
-  console.log('getparams', route.params);
+  const editTime = state.timeList.find(item => item.id === route.params.id);
+
+  console.log('editTime', editTime);
 
   return (
     <View>
       <Text>Edit Screen</Text>
-      {state.currentTimeEntryEdit && <Text>Current Edit Time: {`${state.currentTimeEntryEdit.in} - ${state.currentTimeEntryEdit.out}`}</Text>}
+      {editTime && <Text>Current Edit Time: {`${editTime.in} - ${editTime.out}`}</Text>}
     </View>
   );
 }

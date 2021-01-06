@@ -2,13 +2,8 @@ import React, { useContext } from 'react'
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-import { Context } from '../context/TimeContext';
-
 const TimeEntry = ({ navigation, time }) => {
-  const { state, editTimeEntry } = useContext(Context);
-
   const onPress = () => {
-    editTimeEntry(time)
     navigation.navigate('Edit', { id: time.id });
   }
 

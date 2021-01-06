@@ -5,24 +5,6 @@ import { Context } from '../context/TimeContext';
 
 import TimeEntry from '../components/TimeEntry';
 
-const DATA = [
-  {
-    in: '5:00pm',
-    out: '6:00pm',
-    id: 'abc',
-  },
-  {
-    in: '3:00am',
-    out: '9:00am',
-    id: 'def',
-  },
-  {
-    in: '12:00am',
-    out: '8:00pm',
-    id: 'ghi',
-  }
-]
-
 const HomeScreen = ({ navigation }) => {
   const { state, addNewTimeEntry } = useContext(Context);
 
@@ -34,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View>
       <FlatList
-        data={DATA}
+        data={state.timeList}
         renderItem={({ item }) => <TimeEntry time={{...item}} navigation={navigation} />}
         keyExtractor={(item) => item.id}
       />

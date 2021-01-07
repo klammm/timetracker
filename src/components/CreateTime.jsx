@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import TimePicker from '@react-native-community/datetimepicker';
 
-const CreateTime = () => {
-  const [time, setTime] = useState(new Date());
+import { convertDateToString } from '../utils/convertTimeString'
+
+const CreateTime = ({ initialTime }) => {
+  const [time, setTime] = useState(initialTime);
+
+  console.log('time', time);
 
   const onChange = (event, date) => {
     setTime(date)
   }
 
+  const timeToDisplay = convertDateToString(time)
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{`${time.getHours()} : ${time.getMinutes()}`}</Text>
+      <Text style={styles.text}>{timeToDisplay}</Text>
       <View style={styles.timeContainer}>
         <TimePicker 
           mode="time"
@@ -23,6 +29,10 @@ const CreateTime = () => {
       </View>
     </View>
   )
+}
+
+CreateTime.defaultProps = {
+  initialTime: new Date(),
 }
 
 const styles = StyleSheet.create({

@@ -2,18 +2,18 @@ import createDataContext from './createDataContext';
 
 const MOCK_DATA = [
   {
-    in: "5:00pm",
-    out: "6:00pm",
+    in: new Date(2020, 12, 17, 17, 0, 0),
+    out: new Date(2020, 12, 17, 18, 0, 0),
     id: "abc",
   },
   {
-    in: "3:00am",
-    out: "9:00am",
+    in: new Date(2020, 12, 18, 3, 0, 0),
+    out: new Date(2020, 12, 17, 9, 0, 0),
     id: "def",
   },
   {
-    in: "12:00am",
-    out: "8:00pm",
+    in: new Date(2020, 12, 17, 0, 0, 0),
+    out: new Date(2020, 12, 17, 13, 0, 0),
     id: "ghi",
   },
 ];

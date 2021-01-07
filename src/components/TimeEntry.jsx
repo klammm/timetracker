@@ -2,14 +2,19 @@ import React, { useContext } from 'react'
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
+import { convertDateToString } from '../utils/convertTimeString'
+
 const TimeEntry = ({ navigation, time }) => {
+  const timeIn = convertDateToString(time.in)
+  const timeOut = convertDateToString(time.out)
+
   const onPress = () => {
     navigation.navigate('Edit', { id: time.id });
   }
 
   return (
     <TouchableOpacity style={styles.entry} onPress={onPress}>
-      <Text style={styles.text}>{`${time.in} - ${time.out}`}</Text>
+      <Text style={styles.text}>{`${timeIn} - ${timeOut}`}</Text>
       <Feather style={styles.icon} name="edit" size={24} color="black" />
     </TouchableOpacity>
   );

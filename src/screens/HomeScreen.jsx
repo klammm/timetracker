@@ -1,17 +1,20 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+
 import { Context } from '../context/TimeContext';
+import { calculateHours } from '../utils/calculateHours';
 
 import TimeEntry from '../components/TimeEntry';
 
 const HomeScreen = ({ navigation }) => {
-  const { state, addNewTimeEntry } = useContext(Context);
+  const { state } = useContext(Context);
 
   const onPress = () => {
-    addNewTimeEntry();
     navigation.navigate('Create');
   }
+
+  const totalHours = calculateHours(state.timeList);
 
   return (
     <View>
@@ -23,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.addButton} onPress={onPress}>
         <Feather name="plus-square" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.sumHours}>Total Hours Accumulated: {}</Text>
+      <Text style={styles.sumHours}>Total Hours Accumulated: {totalHours}</Text>
     </View>
   )
 };

@@ -28,7 +28,7 @@ const timeReducer = (state, action) => {
     case 'ADD_TIME_ENTRY':
       return {
         ...state,
-        timeEntry: [...state.timeList, action.payload]
+        timeList: [...state.timeList, action.payload]
       };
     case 'SUBMIT_EDIT_TIME_ENTRY':
       const id = action.id;

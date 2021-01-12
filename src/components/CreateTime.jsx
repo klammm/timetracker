@@ -4,13 +4,12 @@ import TimePicker from '@react-native-community/datetimepicker';
 
 import { convertDateToString } from '../utils/convertTimeString'
 
-const CreateTime = ({ initialTime }) => {
+const CreateTime = ({ initialTime, updateTime }) => {
   const [time, setTime] = useState(initialTime);
-
-  console.log('time', time);
 
   const onChange = (event, date) => {
     setTime(date)
+    updateTime(date)
   }
 
   const timeToDisplay = convertDateToString(time)

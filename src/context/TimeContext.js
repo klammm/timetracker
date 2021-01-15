@@ -48,8 +48,8 @@ const addNewTimeEntry = (dispatch) => {
 }
 
 const submitEditTimeEntry = (dispatch) => {
-  return (timeEntry) => {
-    dispatch({ type: "SUBMIT_EDIT_TIME_ENTRY", payload: timeEntry });
+  return (timeEntry, id) => {
+    dispatch({ type: "SUBMIT_EDIT_TIME_ENTRY", payload: timeEntry, id });
   }
 }
 

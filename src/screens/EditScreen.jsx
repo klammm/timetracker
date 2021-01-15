@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import { Context } from '../context/TimeContext';
@@ -8,22 +8,30 @@ import CreateTime from '../components/CreateTime';
 import SubmitTimeButton from '../components/SubmitTimeButton';
 
 const EditScreen = ({ route, navigation }) => {
-  const { state, submitTimeEntry } = useContext(Context);
+  const { state, submitEditTimeEntry } = useContext(Context);
+  const id = route.params.id;
+  const editTime = state.timeList.find(item => item.id === id);
+  const [timeIn, setTimeIn] = useState(editTime.in);
+  const [timeOut, setTimeOut] = useState(editTime.out);
 
-  const editTime = state.timeList.find(item => item.id === route.params.id);
+  const timeEntry = {
+    in: timeIn,
+    out: timeOut,
+    id
+  };
 
-  const timeIn = convertDateToString(editTime.in)
-  const timeOut = convertDateToString(editTime.out)
-
-  console.log('editTime', editTime.out);
+  const onPress = () => {
+    submitEditTimeEntry(timeEntry, id);
+    navigation.goBack();
+  }
 
   return (
     <View>
       <Text style={styles.text}>Time Start</Text>
-      <CreateTime initialTime={editTime.in} />
+      <CreateTime initialTime={editTime.in} updateTime={setTimeIn} />
       <Text style={styles.text}>Time End</Text>
-      <CreateTime initialTime={editTime.out} />
-      <SubmitTimeButton />
+      <CreateTime initialTime={editTime.out} updateTime={setTimeOut} />
+      <SubmitTimeButton onPress={onPress} />
     </View>
   );
 }

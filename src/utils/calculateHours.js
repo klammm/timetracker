@@ -5,3 +5,7 @@ export const calculateHours = (timeList) => {
     return acc;
   }, 0)
 }
+
+export const roundHours = (number) => {
+  return (Math.round(number * 4) / 4).toFixed(2);
+}

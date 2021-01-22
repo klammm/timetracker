@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native
 import { Feather } from '@expo/vector-icons';
 
 import { Context } from '../context/TimeContext';
-import { calculateHours } from '../utils/calculateHours';
+import { calculateHours, roundHours } from '../utils/calculateHours';
 
 import TimeEntry from '../components/TimeEntry';
 
@@ -15,6 +15,7 @@ const HomeScreen = ({ navigation }) => {
   }
 
   const totalHours = calculateHours(state.timeList);
+  const estimatedHours = roundHours(totalHours);
 
   return (
     <View>
@@ -26,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.addButton} onPress={onPress}>
         <Feather name="plus-square" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.sumHours}>Total Hours Accumulated: {totalHours}</Text>
+      <Text style={styles.sumHours}>Total Hours Accumulated: {estimatedHours}</Text>
     </View>
   )
 };
